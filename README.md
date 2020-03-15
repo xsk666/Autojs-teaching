@@ -10,8 +10,3 @@
 #### 教程作者：怎么让所有男人都喜欢我
 
 #### 作者QQ：1789966059
-
-打赏作者：
-
-![image](https://github.com/xsk666/Autojs-teaching/blob/master/images/wechat-reward.JPG)
-![image](https://github.com/xsk666/Autojs-teaching/blob/master/images/QQ-reward.JPG)
