@@ -1,0 +1,449 @@
+大家好，我的qq:   1789966059   怎么让所有男人都喜欢我
+
+由于目前网上auto.js教程非常稀缺，而且涉及到某些重要的东西讲解得无比高深，让小白们难以理解，毕竟现在是知识付费时代嘛。基于此，决定，写一套从0开始系列超级菜鸟教程。
+--------------------------------------------------------------
+再次谢谢大佬们以前爬过的高山。谢谢大佬们对我们小白们的无私贡献。
+--------------------------------------------------------------
+用最通俗的最直白的语言，由于我是东北人，希望大家理解
+--------------------------------------------------------------
+
+       第五课：实战加密解密，写出我们自己的注册机
+
+--------------------------------------------------------------
+
+
+永远记住一句话----------------我们只看结果---------小白们需要永远记住的一句真理
+
+
+------------你不需要问为什么，只需要照着做--------
+
+把下面的复制到脚本最前面，不解释
+
+if(auto.service==null){auto.waitFor();};
+sleep(1000);
+
+
+把下面的复制到脚本最后面，不解释
+
+sleep(500);
+exit();
+log("难道脚本还没停止吗？");
+
+
+没有麦克风，就不语音了
+
+
+随便在网上找了几个加密解密函数 大家也可以随便找。
+
+原理是一样的。
+
+
+再来说明一下我找的这几个函数。当然我是测试过了，你们随便找到之后，也必须这样测试才可以使用。不解释。
+
+
+因为 加密1函数 只找到了加密，没有找到解密，所以只能用于加密，切记这一点。
+
+
+加密结果 = 加密()
+
+log(加密结果)
+
+解密结果 = 解密()
+
+log(解密结果)
+
+
+我们来测试第一个加密函数  加密1
+
+首先，定义一个固定值
+
+var a = "abc123"
+
+再来一遍
+
+e99a18c428cb38d5f260853678922e03
+e99a18c428cb38d5f260853678922e03
+
+看到了吗 一样 说明 加密1  是   固定加密
+
+继续测试 加密2
+
+g%C3%C5%94ce
+g%C3%C5%94ce
+
+一样，加密2    也是  固定加密
+
+继续测试  加密3
+
+?3l21XYpZ4
+g?3N21nXYyZ2
+e?3B214XYTZ2
+
+每次都不一样，说明  加密3  是  随机加密
+
+我们再测试下解密 看能不能解开 
+
+解密只有2  3  
+
+解密2   abc123   正确   完美
+
+解密3   abc123   再来一个 abc123   abc123  完美 
+
+我们继续
+
+手机的imei是唯一的，切记这点，首先，我们定义：
+
+唯一 = device.getIMEI()
+
+我们来回忆一下：
+
+加密1 加密2-------固定加密
+
+加密3 ------------随机加密
+
+解密2  解密3------解密使用
+
+开始加密，可以用 加密2 加密3，随便用，都可以
+
+但是你需要记住 加密的次数和加密顺序
+
+-------3次-------加密2--------加密2--------加密3
+
+看结果
+
+?wv1%yv%4rv%0v%S0v%7vJ%5v%8Sw%3w%Uxw%9vW%vv%55v%yy%7j5
+
+
+我们在我们自己的脚本中，开始写解密，相反的顺序
+
+----------解密3---------解密2--------解密2------3次----
+
+
+得到
+
+358811051254785
+
+我们测试下 运行 这个函数 
+
+358811051254785
+
+完美了，继续
+
+
+运行到这里了 我们可以得到  一个   “加密结果3”
+
+
+需要让对方把这个值 发给我们 这样操作
+
+
+setClip(加密结果3);
+
+toast ("已经复制到右键了，请发给我");
+
+
+演示一下，运行一下，他发给我们的是这个
+
+?wvl%yv%4gv%0v%p0v%7vr%5v%8Hw%3w%dxw%9vk%vv%5hv%yy%7j5
+
+说明，我们的方法是对的。继续
+
+对方发给我们之后 我们运行解密 结果也出来了。
+
+还是这个数字。358811051254785。那当然还是它了。
+
+那么，我们就这样，什么也不干就发给他吗？？？
+不，，，，，，，，稍微有点常识的看一眼都知道，这可能就是手机的某个参数。
+
+这时候，有小白就会问了，这不是没有意义吗？！错。大错特错。
+你看看对方发给我们的是什么，每次都不一样，他也迷糊，是吧。
+。。。。。。我们可以把提示代码抹去，虽然他每次都复制了，但是对方不知道呀，嘿嘿。你只需要第一次告诉对方，复制右键发给我们。嘿嘿。
+
+
+为了彻底迷惑对方，我们再继续对“唯一”进行多次混合加密。这里必须用固定加密。。嘿嘿。
+
+
+看我操作：
+
+写完了，累死了，继续
+
+我们在我们自己的脚本中，也复制一模一样的，运行，
+
+得到 “加密结果10”----这个就是我们要发给对方的验证码了
+
+最后，我们把代码完善下，能删除的log都删了
+
+ok了
+
+------------
+
+需要特别说明的 就是 你发给对方的脚本中 只能有加密函数
+别傻了胡痴地 把解密函数 也给对方发过去。嘿嘿。
+------------
+
+这个只是在脚本上加密解密。还有网络加密解密。如果，有感兴趣的，以后可以出一个教程。非常简单的。因为网站都已经给我们现成的auto.js封装好的啊。只需要随便改一点点东西，就可以使用了。
+
+
+我再强调一次，爱听不听。
+
+
+——————--------我们只看结果——————---
+
+
+未完待续。这是第五节课。欢迎来讨论，大家共同进步。
+
+下一节课，我将用最通俗的最直白的语言， 继续实战花椒直播，灵活运用各种函数（二）
+
+谢谢大家。
+--------------------------------------------------------
+
+
+代码发到下面了，小白们，可以自己好好看看
+
+
+if(auto.service==null){auto.waitFor();};
+sleep(1000);
+
+唯一 = device.getIMEI()
+
+加密结果1 = 加密2(唯一)
+加密结果2 = 加密2(加密结果1)
+加密结果3 = 加密3(加密结果2)
+
+setClip(加密结果3);
+//toast ("已经复制到右键了，请发给我");
+
+sleep(90000)
+
+加密结果4 = 加密2(唯一)
+加密结果5 = 加密2(加密结果4)
+加密结果6 = 加密1(加密结果5)
+加密结果7 = 加密1(加密结果6)
+加密结果8 = 加密2(加密结果7)
+加密结果9 = 加密1(加密结果8)
+加密结果10 = 加密2(加密结果9)
+
+var 对方输入框里的 = rawInput("请输入验证码");
+
+if (对方输入框里的 == 加密结果10) {
+    log("验证码正确")
+    //开始干活喽
+} else {
+    log("验证码错误");
+    exit();
+}
+
+
+
+function 加密1(string) {
+    return java.math.BigInteger(1, java.security.MessageDigest.getInstance("MD5")
+        .digest(java.lang.String(string).getBytes())).toString(16);
+
+}
+
+
+function 加密2(code) {
+    var c = String.fromCharCode(code.charCodeAt(0) + code.length);
+    for (var i = 1; i < code.length; i++) {
+        c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1));
+    }
+    return escape(c);
+}
+
+
+
+function 加密3(stringW) {
+    
+    var str = stringW + "?";
+
+    
+    var ranWs = random(1, 6);
+    var str1 = "";
+    for (var i = 0; i < str.length; i++) {
+        str1 = str1 + str[i];
+        if (i % ranWs == 0) {
+            str1 = str1 + ranLetter();
+        }
+    }
+    log(str1)
+    str1 = ranWs + str1;
+
+    
+    str1 = str1.split("").reverse();
+
+    
+    for (var x = 0; x < str1.length; x++) {
+        str1[x] = charDh(str1[x]);
+    }
+
+    return str1.join("");
+}
+
+function ranLetter() {
+    var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var ran = random(0, 3);
+    if (ran == 0) {
+        return random(0, 9);
+    } else if (ran == 1) {
+        return arr[random(0, arr.length - 1)];
+    } else {
+        return arr[random(0, arr.length - 1)].toUpperCase();
+    }
+}
+
+function charDh(cha) {
+    var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    for (var jw = 0; jw < arr.length; jw++) {
+        if (cha == arr[jw]) {
+            return arr[arr.length - 1 - jw];
+        }
+    }
+    return cha;
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+var b = ""
+
+解密结果3 = 解密3(b)
+
+解密结果2 = 解密2(解密结果3)
+
+解密结果1 = 解密2(解密结果2)
+
+//log(解密结果1)
+
+//解密结果1  就是对方手机的IMEI 也就是“唯一”
+
+加密结果4 = 加密2(解密结果1)
+加密结果5 = 加密2(加密结果4)
+加密结果6 = 加密1(加密结果5)
+加密结果7 = 加密1(加密结果6)
+加密结果8 = 加密2(加密结果7)
+加密结果9 = 加密1(加密结果8)
+加密结果10 = 加密2(加密结果9)
+
+log(加密结果10)
+
+
+
+function 解密2(code) {
+    code = unescape(code);
+    var c = String.fromCharCode(code.charCodeAt(0) - code.length);
+    for (var i = 1; i < code.length; i++) {
+        c += String.fromCharCode(code.charCodeAt(i) - c.charCodeAt(i - 1));
+    }
+    return c;
+}
+
+
+function 解密3(stringJ) {
+    var str2 = stringJ.split("");
+
+    
+    for (var x = 0; x < str2.length; x++) {
+        str2[x] = charDh(str2[x]);
+    }
+
+    
+    str2 = str2.reverse().join("");
+    log(str2)
+    
+    var tt = parseInt(str2[0]);
+    str2 = str2.substring(1, str2.length - 1);
+    var str3 = "";
+    for (var y = 0; y < str2.length; y++) {
+        if ((y - 1) % (tt + 1) != 0) {
+            str3 = str3 + str2[y];
+        }
+    }
+
+    
+    if (str3[str3.length - 1] == "?") {
+        str3 = str3.substring(0, str3.length - 1);
+    }
+
+    return str3;
+}
+
+function charDh(cha) {
+    var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    for (var jw = 0; jw < arr.length; jw++) {
+        if (cha == arr[jw]) {
+            return arr[arr.length - 1 - jw];
+        }
+    }
+    return cha;
+}
+
+
+function 加密1(string) {
+    return java.math.BigInteger(1, java.security.MessageDigest.getInstance("MD5")
+        .digest(java.lang.String(string).getBytes())).toString(16);
+
+}
+
+
+function 加密2(code) {
+    var c = String.fromCharCode(code.charCodeAt(0) + code.length);
+    for (var i = 1; i < code.length; i++) {
+        c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1));
+    }
+    return escape(c);
+}
+
+
+
+function 加密3(stringW) {
+    
+    var str = stringW + "?";
+
+    
+    var ranWs = random(1, 6);
+    var str1 = "";
+    for (var i = 0; i < str.length; i++) {
+        str1 = str1 + str[i];
+        if (i % ranWs == 0) {
+            str1 = str1 + ranLetter();
+        }
+    }
+    log(str1)
+    str1 = ranWs + str1;
+
+    
+    str1 = str1.split("").reverse();
+
+    
+    for (var x = 0; x < str1.length; x++) {
+        str1[x] = charDh(str1[x]);
+    }
+
+    return str1.join("");
+}
+
+function ranLetter() {
+    var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var ran = random(0, 3);
+    if (ran == 0) {
+        return random(0, 9);
+    } else if (ran == 1) {
+        return arr[random(0, arr.length - 1)];
+    } else {
+        return arr[random(0, arr.length - 1)].toUpperCase();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
