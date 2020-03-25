@@ -1,0 +1,643 @@
+大家好，我的qq:   1789966059   怎么让所有男人都喜欢我
+
+由于目前网上auto.js教程非常稀缺，而且涉及到某些重要的东西讲解得无比高深，让小白们难以理解，毕竟现在是知识付费时代嘛。基于此，决定，写一套从0开始系列超级菜鸟教程。
+--------------------------------------------------------------
+再次谢谢大佬们以前爬过的高山。谢谢大佬们对我们小白们的无私贡献。
+--------------------------------------------------------------
+用最通俗的最直白的语言，由于我是东北人，希望大家理解
+--------------------------------------------------------------
+
+
+                 第九课：实战，简单的ui
+
+
+有的小白又说了，你看人家写的脚本ui都好复杂呀，自己怎么写也写不出来。你怎么能说简单呢。其实，网上有好多大佬们已经写得非常非常好的代码了。我们只管使用就行了。不需要小白们懂为什么，只管抄用。嘿嘿。再次谢谢大佬们。
+
+我在网上随便找了几个ui例子。大家也可以随便找。原理一样的。
+
+
+auto.js写脚本，第一个，必须要打开无障碍服务
+
+网上有现成的例子
+
+"ui";
+
+ui.layout(
+    <vertical>
+        <appbar>
+            <toolbar title="UI脚本使用无障碍服务的最佳实践"/>
+        </appbar>
+        <Switch id="autoService" text="无障碍服务" checked="{{auto.service != null}}" padding="8 8 8 8" textSize="15sp"/>
+        <frame height="200" gravity="center">
+            <text text="相关配置..." gravity="center"/>
+        </frame>
+        <button id="start" text="开始运行"/>
+    </vertical>
+);
+
+ui.autoService.on("check", function(checked) {
+    // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
+    if(checked && auto.service == null) {
+        app.startActivity({
+            action: "android.settings.ACCESSIBILITY_SETTINGS"
+        });
+    }
+    if(!checked && auto.service != null){
+        auto.service.disableSelf();
+    }
+});
+
+// 当用户回到本界面时，resume事件会被触发
+ui.emitter.on("resume", function() {
+    // 此时根据无障碍服务的开启情况，同步开关的状态
+    ui.autoService.checked = auto.service != null;
+});
+
+ui.start.on("click", function(){
+    //程序开始运行之前判断无障碍服务
+    if(auto.service == null) {
+        toast("请先开启无障碍服务！");
+        return;
+    }
+    main();
+});
+
+
+function main() {
+    // 这里写脚本的主逻辑
+    threads.start(function () {
+        log("开始运行--我们的脚本");
+        sleep(2000);
+        log("运行结束--运行结束");
+    });
+}
+
+先啥也不管，直接测试。
+
+直接点 开始运行，点不开吧。我们手动打开无障碍服务开关。再点 开始运行，运行了吧，哦了。一会还要测试一遍。
+
+有些小白又说了。为什么还要测试呀？那是因为：我们第一次测试的时候，开关默认是没打开的。现在是开关已经打开了。所以，再需要测试一下。
+
+写脚本最重要的就是测试，测试，测试。
+
+写脚本最重要的就是测试，测试，测试。
+
+写脚本最重要的就是测试，测试，测试。
+
+
+
+点 开始运行。哦了，完美。继续
+
+一般脚本都是需要按 音量键 停止脚本的
+
+在网上找的代码，直接复制
+
+    // 屏蔽音量键调节声音
+    events.setKeyInterceptionEnabled("volume_up", true);
+    //启用按键监听
+    events.observeKey();
+    //监听音量键按下
+    events.onKeyDown("volume_up", () => {
+        toastLog('按音量键停止');
+        exit();   //停止、退出脚本
+    });
+
+有的小白又该问了，这代码是什么意思呀。我也不懂，我连英文都不懂。我只会使用。嘿嘿。抄就完了。放在这里。
+
+继续
+
+再看屏幕中间 有个 相关配置 我们找找，在这里，改成 我们需要让客户看到的字，嘿嘿。
+
+继续
+
+把第五节课  第六节课 内容都复制到脚本里
+
+一般来说，函数都放在脚本的最最后面，之后就不管她们了。
+
+看我操作
+
+//第五节课代码
+
+if(auto.service==null){auto.waitFor();};
+sleep(1000);
+
+唯一 = device.getIMEI()
+
+加密结果1 = 加密2(唯一)
+加密结果2 = 加密2(加密结果1)
+加密结果3 = 加密3(加密结果2)
+
+setClip(加密结果3);
+//toast ("已经复制到右键了，请发给我");
+
+sleep(90000)
+
+加密结果4 = 加密2(唯一)
+加密结果5 = 加密2(加密结果4)
+加密结果6 = 加密1(加密结果5)
+加密结果7 = 加密1(加密结果6)
+加密结果8 = 加密2(加密结果7)
+加密结果9 = 加密1(加密结果8)
+加密结果10 = 加密2(加密结果9)
+
+var 对方输入框里的 = rawInput("请输入验证码");
+
+if (对方输入框里的 == 加密结果10) {
+    log("验证码正确")
+    //开始干活喽
+} else {
+    log("验证码错误");
+    exit();
+}
+
+
+function 加密1(string) {
+    return java.math.BigInteger(1, java.security.MessageDigest.getInstance("MD5")
+        .digest(java.lang.String(string).getBytes())).toString(16);
+
+}
+
+
+function 加密2(code) {
+    var c = String.fromCharCode(code.charCodeAt(0) + code.length);
+    for (var i = 1; i < code.length; i++) {
+        c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1));
+    }
+    return escape(c);
+}
+
+
+
+function 加密3(stringW) {
+    
+    var str = stringW + "?";
+
+    
+    var ranWs = random(1, 6);
+    var str1 = "";
+    for (var i = 0; i < str.length; i++) {
+        str1 = str1 + str[i];
+        if (i % ranWs == 0) {
+            str1 = str1 + ranLetter();
+        }
+    }
+    log(str1)
+    str1 = ranWs + str1;
+
+    
+    str1 = str1.split("").reverse();
+
+    
+    for (var x = 0; x < str1.length; x++) {
+        str1[x] = charDh(str1[x]);
+    }
+
+    return str1.join("");
+}
+
+function ranLetter() {
+    var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var ran = random(0, 3);
+    if (ran == 0) {
+        return random(0, 9);
+    } else if (ran == 1) {
+        return arr[random(0, arr.length - 1)];
+    } else {
+        return arr[random(0, arr.length - 1)].toUpperCase();
+    }
+}
+
+function charDh(cha) {
+    var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    for (var jw = 0; jw < arr.length; jw++) {
+        if (cha == arr[jw]) {
+            return arr[arr.length - 1 - jw];
+        }
+    }
+    return cha;
+}
+
+//第六节课代码
+
+if (auto.service == null) { auto.waitFor(); };
+sleep(1000);
+
+while (true) {
+    if (currentPackage() != "com.huajiao") {
+        log("即将打开花椒！");
+        app.launchPackage("com.huajiao");
+        sleep(5000)
+    } else {
+        log("已经在花椒中，即将开始进行下一步操作！");
+        break;
+    };
+};
+
+while (true) {
+    if (currentActivity() == "com.huajiao.detail.WatchesListActivity") {
+        log("已经在花椒直播间，哦了");
+        break;
+    } else {
+        log("没有在花椒直播间,请看看怎么办");
+        //这里可以干很多事，比如：sleep多久 
+        //还没进入画面，手机卡住了。再处理等等。 
+        sleep(1000)
+        exit();
+    };
+}
+
+var 条件 = className("android.widget.Button").depth(8).id("btn_share")
+var 查找结果 = 条件.findOne(9000)
+log(查找结果)
+
+if (查找结果 != null) {
+    log("查找到了一个控件---分享")
+}
+
+
+var 点击结果 = 查找结果.click()
+log(点击结果)
+
+if (点击结果 = true) {
+    log("我们点击成功了")
+}
+
+sleep(500);
+exit();
+log("难道脚本还没停止吗？");
+
+对齐
+
+
+
+继续
+
+开始 删减代码 仔细看操作
+
+因为无障碍已经写过了，所以这些都必须删掉。
+
+这个，最后的留一个就行。没用的也删除了。
+
+再从头捋一遍，改改代码
+
+改完了。
+
+我们把无障碍关了。停止脚本。重新测试。
+
+
+看到了吗？需要输入验证码  我们输入个错误的，脚本结束。
+
+继续测试，输入正确的验证码
+
+第五课，咱们得到的 最终结果为
+
+Ymkj%97%9Aheh%9B%96%91%C2%98je%98%98%98%C9%9Aggkgh%97%C8%9Afkp
+
+输入正确的 
+
+卡到这里了，因为咱们第六课的脚本写的就是需要手动进入直播间呀！！！手动进入直播间
+
+
+
+看，到这步了，完美，都正确，把第六课的代码补齐
+
+以前讲过 click()
+
+click("");
+sleep(3000);
+click("");
+log("我们分享成功了")
+
+
+把脚本停止，再重新重新测试下
+
+
+暂时是完美的
+
+
+再回过头来，从头到尾想一下脚本的运行，总觉得这样，好像哪里不对呢，是吧。怎么输入验证码 这样呢 为什么不放在ui里面，那样多完美呀。继续。这样操作。
+
+因为是输入框。去官网，找到这个。
+
+"ui";
+ui.layout(
+    <vertical padding="16">
+        <text textSize="16sp" textColor="black" text="请输入姓名"/>
+        <input id="name" text="小明"/>
+        <button id="ok" text="确定"/>
+    </vertical>
+);
+
+//指定确定按钮点击时要执行的动作
+ui.ok.click(function(){
+    //通过getText()获取输入的内容
+    var name = ui.name.getText();
+    toast(name + "您好!");
+});
+
+
+我不懂英文，但是上面的应该是写入ui里面的，下面的是动作。 
+
+看我操作，把多余的 重复的都去掉
+
+动作只是获取输入的内容，就用一行代码就行了
+
+最后，测试一下
+
+完美
+
+有的小白，这时候有点迷糊了，怎么每次运行，必须都再次输入验证码呀，好麻烦。。。。。。。。。。。。这就涉及到保存配置项和读取配置项 的内容了。那就是另一节课的内容了。嘿嘿。
+
+
+重要知识科普一下，分享一下：
+
+多线程：官方文档
+
+threads模块提供了多线程支持，可以启动新线程来运行脚本。
+
+脚本主线程会等待所有子线程执行完成后才停止执行，因此如果子线程中有死循环，请在必要的时候调用exit()来直接停止脚本或threads.shutDownAll()来停止所有子线程。
+
+通过threads.start()启动的所有线程会在脚本被强制停止时自动停止。
+
+由于JavaScript自身没有多线程的支持，因此您可能会遇到意料之外的问题。
+------------------------------------
+
+开始解析，意思就是说 子线程 它可以单独运行。多个子线程可以同时运行。
+
+
+小白们 只需要记住两个例子
+
+//新建一个线程，并执行
+threads.start(function(){
+
+    //在新线程执行的代码
+    
+    
+});
+
+//定义一个线程的值 根据值，做出反应
+var thread = threads.start(function(){
+
+    //在新线程执行的代码
+    
+    
+});
+
+//停止线程执行
+thread.interrupt();
+
+停止所有通过threads.start()启动的子线程
+threads.shutDownAll()
+
+
+
+小白们只需要记住这两个例子就行。还有，官方的示例代码，能会用就可以了。其余的，我也不会。嘿嘿。
+
+
+我再强调一次，爱听不听。
+
+——————--------我们只看结果——————---
+
+
+未完待续。这是第九节课。欢迎来讨论，大家共同进步。
+
+下一节课，我还没有想好写啥呢，嘿嘿
+
+谢谢大家。
+
+----------------------------------------------------------
+
+代码发到下面了，小白们，可以自己好好看看
+
+
+
+"ui";
+
+ui.layout(
+    <vertical>
+        <appbar>
+            <toolbar title="UI脚本使用无障碍服务的最佳实践" />
+        </appbar>
+        <Switch id="autoService" text="无障碍服务" checked="{{auto.service != null}}" padding="8 8 8 8" textSize="15sp" />
+        <frame height="200" gravity="center">
+            <text text="怎么让所有男人都喜欢我..." gravity="center" />
+        </frame>
+
+
+
+
+
+        <text textSize="16sp" textColor="black" text="请输入验证码" />
+        <input id="yanzhengma" text="" />
+
+
+
+
+
+
+        <button id="start" text="开始运行" />
+    </vertical>
+);
+
+ui.autoService.on("check", function (checked) {
+    // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
+    if (checked && auto.service == null) {
+        app.startActivity({
+            action: "android.settings.ACCESSIBILITY_SETTINGS"
+        });
+    }
+    if (!checked && auto.service != null) {
+        auto.service.disableSelf();
+    }
+});
+
+// 当用户回到本界面时，resume事件会被触发
+ui.emitter.on("resume", function () {
+    // 此时根据无障碍服务的开启情况，同步开关的状态
+    ui.autoService.checked = auto.service != null;
+});
+
+ui.start.on("click", function () {
+    //程序开始运行之前判断无障碍服务
+    if (auto.service == null) {
+        toast("请先开启无障碍服务！");
+        return;
+    }
+    // 屏蔽音量键调节声音
+    events.setKeyInterceptionEnabled("volume_up", true);
+    //启用按键监听
+    events.observeKey();
+    //监听音量键按下
+    events.onKeyDown("volume_up", () => {
+        toastLog('按音量键停止');
+        exit();   //停止、退出脚本
+    });
+
+
+
+
+    main();
+});
+
+
+function main() {
+    // 这里写脚本的主逻辑
+    threads.start(function () {
+        log("开始运行--我们的脚本");
+
+
+        唯一 = device.getIMEI()
+
+        加密结果1 = 加密2(唯一)
+        加密结果2 = 加密2(加密结果1)
+        加密结果3 = 加密3(加密结果2)
+
+        setClip(加密结果3);
+        //toast ("已经复制到右键了，请发给我");
+
+        sleep(5000)
+
+        加密结果4 = 加密2(唯一)
+        加密结果5 = 加密2(加密结果4)
+        加密结果6 = 加密1(加密结果5)
+        加密结果7 = 加密1(加密结果6)
+        加密结果8 = 加密2(加密结果7)
+        加密结果9 = 加密1(加密结果8)
+        加密结果10 = 加密2(加密结果9)
+
+        var 对方输入框里的 = ui.yanzhengma.getText();
+
+        if (对方输入框里的 == 加密结果10) {
+            log("验证码正确")
+            //开始干活喽
+        } else {
+            log("验证码错误");
+            exit();
+        }
+
+
+
+        while (true) {
+            if (currentPackage() != "com.huajiao") {
+                log("即将打开花椒！");
+                app.launchPackage("com.huajiao");
+                sleep(5000)
+            } else {
+                log("已经在花椒中，即将开始进行下一步操作！");
+                break;
+            };
+        };
+
+        while (true) {
+            if (currentActivity() == "com.huajiao.detail.WatchesListActivity") {
+                log("已经在花椒直播间，哦了");
+                break;
+            } else {
+                log("没有在花椒直播间,请看看怎么办");
+                //这里可以干很多事，比如：sleep多久 
+                //还没进入画面，手机卡住了。再处理等等。 
+                sleep(1000)
+                //exit();
+            };
+        }
+
+        var 条件 = className("android.widget.Button").depth(8).id("btn_share")
+        var 查找结果 = 条件.findOne(9000)
+        log(查找结果)
+
+        if (查找结果 != null) {
+            log("查找到了一个控件---分享")
+        }
+
+
+        var 点击结果 = 查找结果.click()
+        log(点击结果)
+
+        if (点击结果 = true) {
+            log("我们点击成功了")
+        }
+        click("QQ空间");
+        sleep(3000);
+        click("发表");
+        log("我们分享成功了")
+
+
+
+        sleep(2000);
+        log("运行结束--运行结束");
+    });
+}
+
+
+
+
+function 加密1(string) {
+    return java.math.BigInteger(1, java.security.MessageDigest.getInstance("MD5")
+        .digest(java.lang.String(string).getBytes())).toString(16);
+
+}
+
+
+function 加密2(code) {
+    var c = String.fromCharCode(code.charCodeAt(0) + code.length);
+    for (var i = 1; i < code.length; i++) {
+        c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1));
+    }
+    return escape(c);
+}
+
+
+
+function 加密3(stringW) {
+
+    var str = stringW + "?";
+
+
+    var ranWs = random(1, 6);
+    var str1 = "";
+    for (var i = 0; i < str.length; i++) {
+        str1 = str1 + str[i];
+        if (i % ranWs == 0) {
+            str1 = str1 + ranLetter();
+        }
+    }
+    log(str1)
+    str1 = ranWs + str1;
+
+
+    str1 = str1.split("").reverse();
+
+
+    for (var x = 0; x < str1.length; x++) {
+        str1[x] = charDh(str1[x]);
+    }
+
+    return str1.join("");
+}
+
+function ranLetter() {
+    var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var ran = random(0, 3);
+    if (ran == 0) {
+        return random(0, 9);
+    } else if (ran == 1) {
+        return arr[random(0, arr.length - 1)];
+    } else {
+        return arr[random(0, arr.length - 1)].toUpperCase();
+    }
+}
+
+function charDh(cha) {
+    var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    for (var jw = 0; jw < arr.length; jw++) {
+        if (cha == arr[jw]) {
+            return arr[arr.length - 1 - jw];
+        }
+    }
+    return cha;
+}
+
+
+
+
+
